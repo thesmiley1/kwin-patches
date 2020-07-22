@@ -1,0 +1,47 @@
+KWin - the KDE window manager
+Copyright (C) 2020 John Schroeder
+
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program; if not, write to the Free Software Foundation, Inc., 51 Franklin
+Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
+---
+
+diff --git a/effects/highlightwindow/highlightwindow.cpp b/effects/highlightwindow/highlightwindow.cpp
+index ecfb681b4..4cd5ff2c9 100644
+--- a/effects/highlightwindow/highlightwindow.cpp
++++ b/effects/highlightwindow/highlightwindow.cpp
+@@ -61,12 +61,12 @@ void HighlightWindowEffect::prePaintWindow(EffectWindow* w, WindowPrePaintData&
+     if (!m_highlightedWindows.isEmpty()) {
+         // Initial fade out and changing highlight animation
+         if (opacity == m_windowOpacity.end())
+-            opacity = m_windowOpacity.insert(w, 0.0f);
++            opacity = m_windowOpacity.insert(w, 1.0f);
+         float oldOpacity = *opacity;
+         if (m_highlightedWindows.contains(w))
+-            *opacity = qMin(1.0f, oldOpacity + time / m_fadeDuration);
++            *opacity = 1.0f;
+         else if (w->isNormalWindow() || w->isDialog())   // Only fade out windows
+-            *opacity = qMax(isInitiallyHidden(w) ? 0.0f : 0.15f, oldOpacity - time / m_fadeDuration);
++            *opacity = qMax(0.0f, oldOpacity - time / m_fadeDuration);
+
+         if (*opacity < 0.98f)
+             data.setTranslucent();
+@@ -75,7 +75,7 @@ void HighlightWindowEffect::prePaintWindow(EffectWindow* w, WindowPrePaintData&
+     } else if (m_finishing && m_windowOpacity.contains(w)) {
+         // Final fading back in animation
+         if (opacity == m_windowOpacity.end())
+-            opacity = m_windowOpacity.insert(w, 0.0f);
++            *opacity = 1.0f;
+         float oldOpacity = *opacity;
+         if (isInitiallyHidden(w))
+             *opacity = qMax(0.0f, oldOpacity - time / m_fadeDuration);
