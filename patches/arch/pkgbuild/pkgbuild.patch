@@ -1,5 +1,5 @@
 diff --git a/repos/extra-x86_64/PKGBUILD b/repos/extra-x86_64/PKGBUILD
-index 17b2227..66a7523 100644
+index e559392..50a6e81 100644
 --- a/repos/extra-x86_64/PKGBUILD
 +++ b/repos/extra-x86_64/PKGBUILD
 @@ -13,15 +13,22 @@ depends=(kscreenlocker xcb-util-cursor plasma-framework kcmutils kwayland-server
@@ -10,7 +10,7 @@ index 17b2227..66a7523 100644
 +source=("https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz"{,.sig}
 +        "highlight-window-no-partial-opacity.patch")
  install=$pkgname.install
- sha256sums=('456205b964efadadc6df8e5f3db40da3719bec567cf93f2719b015561a57672e'
+ sha256sums=('36afa37b773d31c0bcb8f4e32fa1f06cc33e15ad00e729ba36f120bbe034903b'
 -            'SKIP')
 +            'SKIP'
 +            '2e039adb85beca1717aa708ca7cc3febda66469113aba09f1b870518390b3b53')
